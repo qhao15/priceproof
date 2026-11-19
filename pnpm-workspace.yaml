@@ -1,0 +1,47 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Dependencies allowed to run install scripts (pnpm blocks all others).
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+
+# One version per library for the whole monorepo; packages use "catalog:".
+catalog:
+  # Tooling
+  typescript: ^6.0.2
+  '@types/node': ^24.19.2
+  eslint: ^10.15.0
+  '@eslint/js': ^10.0.1
+  typescript-eslint: ^8.73.0
+  eslint-config-prettier: ^10.1.8
+  globals: ^17.14.0
+  prettier: ^3.10.1
+  vitest: ^5.1.1
+  '@vitest/coverage-v8': ^5.1.1
+  vite: ^8.3.8
+  # Shared runtime
+  zod: ^4.6.7
+  mongodb: ^7.9.0
+  pino: ^10.4.0
+  # API
+  '@nestjs/common': ^12.5.1
+  '@nestjs/core': ^12.5.1
+  '@nestjs/platform-express': ^12.5.1
+  '@nestjs/testing': ^12.5.1
+  reflect-metadata: ^0.2.2
+  rxjs: ^7.8.2
+  nestjs-pino: ^5.3.2
+  pino-http: ^11.0.0
+  unplugin-swc: ^2.0.0
+  '@swc/core': ^1.16.22
+  supertest: ^7.3.2
+  '@types/supertest': ^7.2.1
+  '@types/express': ^5.0.6
+
+minimumReleaseAgeExclude:
+  - '@vitest/coverage-v8@5.1.1'
+  - '@vitest/mocker@5.1.1'
+  - '@vitest/spy@5.1.1'
+  - vitest@5.1.1

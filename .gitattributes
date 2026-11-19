@@ -1,0 +1,7 @@
+# Keep LF line endings everywhere (Prettier checks for LF; the owner's Git uses core.autocrlf=true).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.gz binary
