@@ -1,0 +1,15 @@
+{
+  "titanium": ["titan tu nhien", "titanium", "titan"],
+  "black": ["den tuyen", "midnight", "black", "den"],
+  "white": ["starlight", "white", "trang"],
+  "silver": ["silver", "bac"],
+  "gray": ["space gray", "graphite", "grey", "gray", "xam"],
+  "blue": ["xanh duong", "xanh navy", "navy", "blue"],
+  "green": ["xanh reu", "xanh la", "green", "mint"],
+  "red": ["red", "do"],
+  "pink": ["pink", "hong"],
+  "purple": ["purple", "tim"],
+  "yellow": ["yellow", "vang"],
+  "gold": ["gold"],
+  "orange": ["orange", "cam"]
+}

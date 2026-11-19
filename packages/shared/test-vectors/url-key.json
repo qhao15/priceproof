@@ -1,0 +1,14 @@
+[
+  {
+    "input": "https://www.Example.vn/dien-thoai/novix-x5?utm_source=fb#reviews",
+    "output": "example.vn/dien-thoai/novix-x5"
+  },
+  {
+    "input": "https://example.vn/dien-thoai/novix-x5/",
+    "output": "example.vn/dien-thoai/novix-x5"
+  },
+  { "input": "http://localhost:4000/p/novix-x5-256", "output": "localhost:4000/p/novix-x5-256" },
+  { "input": "https://example.vn:443/p/Novix-X5", "output": "example.vn/p/Novix-X5" },
+  { "input": "https://example.vn", "output": "example.vn" },
+  { "input": "https://example.vn//p//x", "output": "example.vn/p/x" }
+]

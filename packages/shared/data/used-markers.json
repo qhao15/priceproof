@@ -1,0 +1,15 @@
+{
+  "phrases": [
+    "like new",
+    "da qua su dung",
+    "hang cu",
+    "may cu",
+    "cu dep",
+    "trung bay",
+    "hang trung bay",
+    "refurbished",
+    "renewed",
+    "da kich hoat"
+  ],
+  "rawTitlePatterns": ["\\b99\\s?%"]
+}

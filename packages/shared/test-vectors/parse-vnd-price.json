@@ -1,0 +1,11 @@
+[
+  { "input": "12.990.000₫", "output": 12990000 },
+  { "input": "12.990.000 ₫", "output": 12990000 },
+  { "input": "12,990,000đ", "output": 12990000 },
+  { "input": "12.990.000 VNĐ", "output": 12990000 },
+  { "input": "Giá: 990.000đ", "output": 990000 },
+  { "input": "1.290.000.000₫", "output": 1290000000 },
+  { "input": "Liên hệ", "output": null },
+  { "input": "", "output": null },
+  { "input": "12.990.000₫ - 13.990.000₫", "output": null }
+]
