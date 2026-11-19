@@ -1,0 +1,24 @@
+{
+  "name": "collector",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PriceProof collector: crawlers, observation processing, discount engine, alerts (M2+)",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "db:ping": "node dist/cli/db-ping.js"
+  },
+  "dependencies": {
+    "@priceproof/shared": "workspace:*",
+    "mongodb": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
