@@ -16,6 +16,7 @@
     "lint": "eslint . --max-warnings 0 && prettier --check .",
     "format": "prettier --write .",
     "dev": "pnpm build && pnpm -r --parallel --stream run \"/^dev(:.+)?$/\"",
+    "demo": "pnpm -s --filter \"demo-store...\" run build && pnpm -s --filter demo-store run start",
     "db:ping": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:ping"
   },
   "devDependencies": {

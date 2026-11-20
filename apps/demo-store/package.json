@@ -1,0 +1,35 @@
+{
+  "name": "demo-store",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Two fictional demo stores (DemoMart, ShopJS) with simulated prices for development and tests",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "dev": "node --watch-path=dist --watch-preserve-output dist/main.js",
+    "dev:build": "tsc -b tsconfig.build.json --watch --preserveWatchOutput",
+    "start": "node dist/main.js",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@priceproof/shared": "workspace:*",
+    "express": "catalog:",
+    "pino": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/express": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
