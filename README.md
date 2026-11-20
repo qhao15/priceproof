@@ -62,7 +62,8 @@ Requirements: Node.js 24+, pnpm, and a free MongoDB Atlas cluster.
 pnpm install
 cp .env.example .env          # then set MONGODB_URI
 pnpm db:ping                  # check the database connection
-pnpm dev                      # API on http://localhost:3000 (GET /api/v1/health)
+pnpm dev                      # API on http://localhost:3000 (GET /api/v1/health), demo stores on 4000 and 4001
+pnpm demo                     # only the two demo stores: DemoMart http://localhost:4000, ShopJS http://localhost:4001
 ```
 
 Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`.
@@ -73,12 +74,13 @@ Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`.
 apps/
   api/          NestJS REST API
   collector/    price collector and background jobs
+  demo-store/   two fictional stores (DemoMart, ShopJS) with simulated prices, sale scenarios and fault switches
 packages/
   shared/       pure logic shared by the collector and the API
   contracts/    Zod schemas for every API request and response
 ```
 
-The web app, the Chrome extension and the demo stores will be added under `apps/` as they are built.
+The web app and the Chrome extension will be added under `apps/` as they are built.
 
 ## Data ethics
 
