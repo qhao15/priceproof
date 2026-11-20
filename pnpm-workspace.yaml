@@ -6,6 +6,7 @@ packages:
 allowBuilds:
   '@swc/core': true
   esbuild: true
+  mongodb-memory-server: true
 
 # One version per library for the whole monorepo; packages use "catalog:".
 catalog:
@@ -41,6 +42,14 @@ catalog:
   '@types/express': ^5.0.6
   # Demo store
   express: ^5.3.0
+  # Collector
+  '@crawlee/cheerio': 3.18.2
+  '@crawlee/playwright': 3.18.2
+  playwright: 1.65.1
+  cheerio: ^1.2.0
+  robots-parser: ^3.0.1
+  croner: ^11.0.1
+  mongodb-memory-server: ^11.3.0
 
 minimumReleaseAgeExclude:
   - '@vitest/coverage-v8@5.1.1'

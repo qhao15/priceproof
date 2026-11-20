@@ -2,7 +2,7 @@
   "name": "collector",
   "version": "0.1.0",
   "private": true,
-  "description": "PriceProof collector: crawlers, observation processing, discount engine, alerts (M2+)",
+  "description": "PriceProof collector: crawlers, observation processing, discount engine, health checks",
   "type": "module",
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
@@ -11,12 +11,21 @@
     "db:ping": "node dist/cli/db-ping.js"
   },
   "dependencies": {
+    "@crawlee/cheerio": "catalog:",
+    "@crawlee/playwright": "catalog:",
     "@priceproof/shared": "workspace:*",
+    "cheerio": "catalog:",
+    "croner": "catalog:",
+    "demo-store": "workspace:*",
     "mongodb": "catalog:",
+    "pino": "catalog:",
+    "playwright": "catalog:",
+    "robots-parser": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",
+    "mongodb-memory-server": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
