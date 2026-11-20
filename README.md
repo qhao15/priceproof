@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/qhao15/priceproof/actions/workflows/ci.yml/badge.svg)](https://github.com/qhao15/priceproof/actions/workflows/ci.yml)
 
-> 🚧 **Work in progress.** The foundations are done; the price collector is being built now so that price history exists before the 12.12 sales. Progress is tracked on the [PriceProof Roadmap](https://github.com/users/qhao15/projects) board.
+> 🚧 **Work in progress.** The foundations are done; the price collector is being built now so that price history exists before the 12.12 sales. Progress is tracked on the [PriceProof Roadmap](https://github.com/users/qhao15/projects/3) board.
 
 ## The problem
 
