@@ -17,7 +17,11 @@ jobs:
   checks:
     # Standard runner only: free (SPEC §15.7). Never uses Docker or the Atlas clusters.
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      # Throwaway test MongoDB (mongodb-memory-server) and Chromium for the ShopJS crawler tests
+      MONGOMS_DOWNLOAD_DIR: /home/runner/.cache/mongodb-binaries
+      PLAYWRIGHT_BROWSERS_PATH: /home/runner/.cache/ms-playwright
     steps:
       - uses: actions/checkout@v7
 
@@ -29,7 +33,16 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      - name: Cache the test MongoDB binary and Chromium
+        uses: actions/cache@v6
+        with:
+          path: |
+            /home/runner/.cache/mongodb-binaries
+            /home/runner/.cache/ms-playwright
+          key: test-binaries-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter collector exec playwright install --with-deps chromium
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
