@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/qhao15/priceproof/actions/workflows/ci.yml/badge.svg)](https://github.com/qhao15/priceproof/actions/workflows/ci.yml)
 
-> 🚧 **Work in progress.** The foundations are done; the price collector is being built now so that price history exists before the 12.12 sales. Progress is tracked on the [PriceProof Roadmap](https://github.com/users/qhao15/projects/3) board.
+> 🚧 **Work in progress.** The price collector works against two fictional demo stores; the first real store is next, so that price history exists before the 12.12 sales. Progress is tracked on the [PriceProof Roadmap](https://github.com/users/qhao15/projects/3) board.
 
 ## The problem
 
@@ -60,13 +60,26 @@ Requirements: Node.js 24+, pnpm, and a free MongoDB Atlas cluster.
 
 ```bash
 pnpm install
+pnpm --filter collector exec playwright install chromium   # headless browser for JavaScript-rendered stores
 cp .env.example .env          # then set MONGODB_URI
 pnpm db:ping                  # check the database connection
-pnpm dev                      # API on http://localhost:3000 (GET /api/v1/health), demo stores on 4000 and 4001
-pnpm demo                     # only the two demo stores: DemoMart http://localhost:4000, ShopJS http://localhost:4001
+pnpm db:init                  # collections, validators, indexes and seeds (safe to run again)
+pnpm dev                      # demo stores (4000, 4001), collector, API on http://localhost:3000
 ```
 
-Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`.
+Collector commands:
+
+```bash
+pnpm collector                                   # keeps running and collects on schedule
+pnpm collector:once --minutes 5                  # one time-boxed run, as GitHub Actions runs it every hour
+pnpm scrape:dry --store demomart --category laptop --pages 1   # fetch and parse only, no database writes
+pnpm db:stats                                    # listings per store, labels, last run, database size
+pnpm demo:backfill --days 90                     # simulated history for the demo stores
+pnpm demo:eval                                   # computed labels vs. the demo stores' planned sale scenarios
+pnpm demo                                        # only the two demo stores: DemoMart :4000, ShopJS :4001
+```
+
+Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`. Tests use a throwaway in-memory MongoDB and the demo stores; they never contact real stores or Atlas.
 
 ## Repository layout
 
