@@ -275,17 +275,18 @@ export interface ScrapeRunDoc {
   errorSamples: string[];
 }
 
+/** Counters are upserted with `$inc`, so a counter that was never incremented is absent. */
 export interface StoreHourlyStatsDoc {
   _id: string;
   storeId: string;
   hour: Date;
-  requests: number;
-  successes: number;
-  failures: number;
-  blocked: number;
-  observations: number;
-  changes: number;
-  suspicious: number;
+  requests?: number;
+  successes?: number;
+  failures?: number;
+  blocked?: number;
+  observations?: number;
+  changes?: number;
+  suspicious?: number;
 }
 
 export type ErrorSnapshotKind = 'parse_error' | 'http_error' | 'blocked' | 'timeout';
