@@ -20,7 +20,11 @@
     "db:ping": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:ping",
     "db:init": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:init",
     "collector": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run start",
-    "collector:once": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run once"
+    "collector:once": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run once",
+    "db:stats": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:stats",
+    "scrape:dry": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run scrape:dry",
+    "demo:eval": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run demo:eval",
+    "demo:backfill": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run demo:backfill"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

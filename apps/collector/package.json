@@ -13,7 +13,11 @@
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run",
     "db:ping": "node dist/cli/db-ping.js",
-    "db:init": "node dist/cli/db-init.js"
+    "db:init": "node dist/cli/db-init.js",
+    "db:stats": "node dist/cli/db-stats.js",
+    "scrape:dry": "node dist/cli/scrape-dry.js",
+    "demo:eval": "node dist/cli/demo-eval.js",
+    "demo:backfill": "node dist/cli/demo-backfill.js"
   },
   "dependencies": {
     "@crawlee/cheerio": "catalog:",
