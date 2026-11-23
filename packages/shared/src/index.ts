@@ -3,6 +3,8 @@ export * from './db.js';
 export * from './discount/config.js';
 export * from './discount/engine.js';
 export * from './env/env.js';
+export * from './matching/colors.js';
+export * from './matching/used.js';
 export * from './money/mongo-money.js';
 export * from './money/parse-vnd-price.js';
 export * from './sale-events.js';

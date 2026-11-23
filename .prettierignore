@@ -4,3 +4,4 @@ coverage
 pnpm-lock.yaml
 # Markdown docs are written by hand (the owner's spec included); do not reformat them.
 *.md
+**/fixtures/**
