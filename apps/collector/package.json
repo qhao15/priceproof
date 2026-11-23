@@ -8,7 +8,8 @@
     "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "db:ping": "node dist/cli/db-ping.js"
+    "db:ping": "node dist/cli/db-ping.js",
+    "db:init": "node dist/cli/db-init.js"
   },
   "dependencies": {
     "@crawlee/cheerio": "catalog:",
