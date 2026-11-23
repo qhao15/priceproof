@@ -8,7 +8,7 @@ import { initDatabase } from '../src/db/init.js';
 import { CollectorEnvSchema } from '../src/env.js';
 import { evaluateHealth, pauseStore, runHealthMonitor } from '../src/health/monitor.js';
 import { incHourly } from '../src/health/hourly-stats.js';
-import { refreshStatsIfDue, sweepLeases } from '../src/jobs/maintenance.js';
+import { refreshStatsIfDue, sweepLeases, syncPriorities } from '../src/jobs/maintenance.js';
 import { processObservation } from '../src/processing/observation.js';
 import { resetSaleEventCache } from '../src/processing/stats.js';
 import { storeDefinitions } from '../src/stores/definitions.js';
@@ -263,6 +263,32 @@ describe('maintenance jobs', () => {
     expect(await ctx.col.listings.countDocuments({ 'schedule.leaseUntil': { $ne: null } })).toBe(0);
     expect((await ctx.col.stores.findOne({ _id: 'shopjs' }))?.categories[0]?.leaseUntil).toBeNull();
     expect((await ctx.col.commands.findOne({ type: 'TRACK_URL' }))?.error?.code).toBe('timeout');
+  });
+
+  it('priority sync raises watched listings to priority 2 and brings their check forward', async () => {
+    const l = (await ctx.col.listings.findOne({ storeProductId: 'dm-cmd-1' }))!;
+    await ctx.col.listings.updateOne(
+      { _id: l._id },
+      {
+        $set: {
+          'schedule.priority': 0,
+          'schedule.nextCheckAt': new Date(now.getTime() + 86_400_000),
+        },
+      },
+    );
+    await ctx.col.watches.insertOne({
+      _id: new ObjectId(),
+      userId: new ObjectId(),
+      productId: l.productId,
+      targetPrice: null,
+      notifyBackInStock: true,
+      createdAt: now,
+      updatedAt: now,
+    });
+    expect(await syncPriorities(ctx)).toBeGreaterThanOrEqual(1);
+    const after = (await ctx.col.listings.findOne({ _id: l._id }))!;
+    expect(after.schedule.priority).toBe(2);
+    expect(after.schedule.nextCheckAt.getTime()).toBe(now.getTime() + 120 * 60_000);
   });
 
   it('runs the daily stats refresh once per ICT day, after 03:00', async () => {

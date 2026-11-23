@@ -1,6 +1,6 @@
-import { fromMongoMoney } from '@priceproof/shared';
+import { computePriority, fromMongoMoney } from '@priceproof/shared';
 import type { CollectorContext } from '../context.js';
-import { computeStatsFor, nextCheckAt, priorityFor, statsToDoc } from '../processing/stats.js';
+import { computeStatsFor, nextCheckAt, statsToDoc } from '../processing/stats.js';
 import { ictDate, ictHour } from '../time.js';
 
 /** Daily stats refresh time (SPEC §9.1): 03:00 ICT. */
@@ -38,12 +38,22 @@ export async function sweepLeases(ctx: CollectorContext): Promise<void> {
 export async function syncPriorities(ctx: CollectorContext): Promise<number> {
   const now = ctx.clock();
   let changed = 0;
+  // One query for every watched product instead of one per listing.
+  const watched = new Set(
+    (await ctx.col.watches.distinct('productId')).map((id) => id.toHexString()),
+  );
   const cursor = ctx.col.listings.find(
     { status: 'active' },
     { projection: { productId: 1, trackedAt: 1, stats: 1, current: 1, schedule: 1 } },
   );
   for await (const l of cursor) {
-    const priority = await priorityFor(ctx, l, l.stats.dealLabel, l.current.changedAt, now);
+    const priority = computePriority({
+      hasWatch: watched.has(l.productId.toHexString()),
+      trackedAt: l.trackedAt,
+      dealLabel: l.stats.dealLabel,
+      changedAt: l.current.changedAt,
+      now,
+    });
     if (priority !== l.schedule.priority) {
       // A higher priority brings the next check forward; a lower one never postpones it.
       const next = await nextCheckAt(ctx, priority, now);
