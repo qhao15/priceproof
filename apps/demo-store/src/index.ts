@@ -30,5 +30,6 @@ export {
   type StartDemoStoresOptions,
   stopDemoStores,
 } from './server.js';
+export type { DemoRequestEvent } from './stores/common.js';
 export { SHOPJS_LOADING_TEXT } from './stores/shopjs.js';
 export { type DemoTruth, type DemoTruthListing, type DemoTruthProduct, getTruth } from './truth.js';

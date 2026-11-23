@@ -19,6 +19,18 @@ export interface StoreContext {
   /** Random source for `errors5pct`. Default `Math.random`. */
   random: () => number;
   logger: Logger;
+  /** Test hook: called for every finished request (used to measure the collector's rate). */
+  onRequest?: (event: DemoRequestEvent) => void;
+}
+
+export interface DemoRequestEvent {
+  storeId: DemoStoreId;
+  method: string;
+  path: string;
+  status: number;
+  userAgent: string;
+  /** Real time when the request arrived (ms). */
+  at: number;
 }
 
 export const PAGE_SIZE = 24;
@@ -134,7 +146,16 @@ export function createStoreApp(
 
   app.use((req, res, next) => {
     const started = performance.now();
+    const at = Date.now();
     res.on('finish', () => {
+      ctx.onRequest?.({
+        storeId,
+        method: req.method,
+        path: req.originalUrl,
+        status: res.statusCode,
+        userAgent: req.get('user-agent') ?? '',
+        at,
+      });
       ctx.logger.debug(
         {
           store: storeId,

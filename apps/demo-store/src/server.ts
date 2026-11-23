@@ -4,7 +4,7 @@ import type { Express } from 'express';
 import { type Logger, pino } from 'pino';
 import { createClock } from './clock.js';
 import { type DemoFault, parseDemoEnv } from './env.js';
-import type { StoreContext } from './stores/common.js';
+import type { DemoRequestEvent, StoreContext } from './stores/common.js';
 import { createDemoMartApp } from './stores/demomart.js';
 import { createShopJsApp } from './stores/shopjs.js';
 
@@ -30,6 +30,8 @@ export interface StartDemoStoresOptions {
   logger?: Logger;
   /** Where the `DEMO_*` defaults are read from. Default `process.env`. */
   env?: NodeJS.ProcessEnv;
+  /** Test hook: called for every finished request. */
+  onRequest?: (event: DemoRequestEvent) => void;
 }
 
 export interface RunningDemoStores {
@@ -77,6 +79,7 @@ export async function startDemoStores(
     faults: new Set(options.faults ?? env.DEMO_FAULTS),
     random: options.random ?? Math.random,
     logger: options.logger ?? pino({ level: env.LOG_LEVEL, name: 'demo-store' }),
+    onRequest: options.onRequest,
   };
   const host = options.host ?? '127.0.0.1';
   const servers: Server[] = [];

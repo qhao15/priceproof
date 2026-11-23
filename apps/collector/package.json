@@ -6,6 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
+    "dev": "node --watch-path=dist --watch-preserve-output dist/main.js --mode daemon",
+    "dev:build": "tsc -b tsconfig.build.json --watch --preserveWatchOutput",
+    "start": "node dist/main.js --mode daemon",
+    "once": "node dist/main.js --mode once",
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run",
     "db:ping": "node dist/cli/db-ping.js",

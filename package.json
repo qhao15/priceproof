@@ -18,7 +18,9 @@
     "dev": "pnpm build && pnpm -r --parallel --stream run \"/^dev(:.+)?$/\"",
     "demo": "pnpm -s --filter \"demo-store...\" run build && pnpm -s --filter demo-store run start",
     "db:ping": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:ping",
-    "db:init": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:init"
+    "db:init": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run db:init",
+    "collector": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run start",
+    "collector:once": "pnpm -s --filter \"collector...\" run build && pnpm -s --filter collector run once"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
